@@ -1,2 +1,5 @@
-console.log("Hello World!");
-console.log("just a lol");
+import './items';
+import './render';
+import './events';
+import './style.css';
+import './reset.css';

@@ -1,0 +1,21 @@
+:root{
+    --lv0: white;
+    --lv1: #eee;
+    --lv2: #ccc;
+}
+
+body{
+    display: flex;
+    height: 100vh;
+    background-color: var(--lv0);
+}
+
+aside{
+    flex: 0 1 1;
+    width: 300px;
+    background-color: var(--lv1);
+}
+
+main{
+    flex: 1 1 0;
+}
