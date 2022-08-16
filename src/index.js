@@ -1,5 +1,4 @@
-import './items';
-import './render';
-import './events';
-import './style.css';
+import './task';
+import './dom';
 import './reset.css';
+import './style.css';
