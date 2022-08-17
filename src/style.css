@@ -1,7 +1,9 @@
 :root{
-    --lv0: white;
-    --lv1: #eee;
-    --lv2: #ccc;
+    --lv0: #eee;
+    --lv1: #bbb;
+    --lv2: #444;
+    --tx1: black;
+    --tx2: white;
 }
 
 body{
@@ -26,6 +28,7 @@ main{
     padding: 20px;
     text-align: center;
     font-size: 2rem;
+    color: var(--tx2);
 }
 
 .general, .projects{
