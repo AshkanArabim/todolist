@@ -31,10 +31,15 @@ main{
     color: var(--tx2);
 }
 
-.general, .projects{
-    padding: 5px;
+.general, .projectsholder{
+    margin: 15px;
 }
 
-.projects>div{
-    padding: 5px 15px;
+.select{
+    padding: 10px 25px;
+    font-size: 1rem;
+}
+
+.general>h2, .projectsholder>h2{
+    font-size: 1.5rem;
 }

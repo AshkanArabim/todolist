@@ -6,10 +6,14 @@ class utils {
             parent.appendChild(arguments[i]);
         }
     }
-    static etc(element, text, clas) {
+    static etc(element, text) {
         const product = this.cr(element);
         product.textContent = text;
-        product.classList.add(clas);
+        if(arguments[2]){
+            for (let i = 2; i<arguments.length; i++) {
+                product.classList.add(arguments[i]);
+            }
+        };
         return product;
     }
 }
@@ -43,26 +47,36 @@ export default class dom {
         const container = utils.etc('div','','general')
         utils.appChildren(
             container,
-            utils.etc('div','Inbox','inbox-select'),
-            utils.etc('div','Today','today-select'),
-            utils.etc('div','Next 7 Days','7days-select')
+            utils.etc('div','Inbox','inbox','select'),
+            utils.etc('div','Today','today','select'),
+            utils.etc('div','Next 7 Days','7days','select')
         );
         return container;
     }
 
     static makeProjectsSection() {
-        const container = utils.etc('div','Projects','projects');
+        const container = utils.etc('div','','projectsholder');
+        const containerTitle = utils.etc('h2','Projects');
+        const projectCreatorButton = utils.etc('button','New Project','new-project')
         utils.appChildren(
-            container, 
-            this.makeProject(),
-            this.makeProject()
+            container,
+            containerTitle,
+            this.makeProjectsGroup(),
+            projectCreatorButton,
         );
         return container;
     }
 
-    static makeProject() {
-        const project = utils.etc('div','sample','project');
-        return project;
+    static makeProjectsGroup() {
+        const container = utils.etc('div','','projects');
+        //this section to be removed
+        utils.appChildren(
+            container,
+            utils.etc('div','sample','sample','select'),
+            utils.etc('div','sample','sample','select')
+        )
+        //this section to be removed
+        return container;
     }
 
     static makeMain() {
