@@ -1,4 +1,5 @@
-import './task';
-import './dom';
+import dom from './dom';
 import './reset.css';
 import './style.css';
+
+dom.render();

@@ -1,3 +1,5 @@
+import Project from './project';
+
 class utils {
     static cr(element) {return document.createElement(element);}
     static qs(query) {return document.querySelector(query);}
@@ -19,7 +21,7 @@ class utils {
 }
 
 export default class dom {
-    static renderSkeleton() {
+    static render() {
         const body = utils.qs('body');
         utils.appChildren(
             body,
@@ -47,11 +49,17 @@ export default class dom {
         const container = utils.etc('div','','general')
         utils.appChildren(
             container,
-            utils.etc('div','Inbox','inbox','select'),
+            this.makeInbox(),
             utils.etc('div','Today','today','select'),
             utils.etc('div','Next 7 Days','7days','select')
         );
         return container;
+    }
+    
+    static makeInbox() {
+        const inboxSelector = utils.etc('div','Inbox','inbox','select');
+
+        return inboxSelector;
     }
 
     static makeProjectsSection() {
@@ -81,8 +89,10 @@ export default class dom {
 
     static makeMain() {
         const main = utils.cr('main');
+        const mainContent = undefined; //tasks object will replace this.
+        utils.appChildren(
+            main
+        )
         return main;
     }
 }
-
-dom.renderSkeleton();
