@@ -1,15 +1,32 @@
-// const task = (function() {
-//     function makeProject(title, desc, children = []) {
-//         return {title, desc, children}
-//     }
-//     function makeItem(checked, title, desc, dueDate, dueTime, priority, notes) {
-//         return {checked, title, desc, dueDate, dueTime, priority, notes};
-//     }
-//     return {makeItem, makeProject}
-// }) ()
-
 export default class task {
-    getName() {
-        console.log('name');
+    constructor(title, desc, dueDate, priority) {
+        this.title = title;
+        this.desc = desc;
+        this.dueDate = dueDate;
+        this.priority = priority;
+    }
+    getTitle() {
+        return this.title;
+    }
+    setTitle(title) {
+        this.title = title;
+    }
+    getDesc() {
+        return this.desc;
+    }
+    setDesc(desc) {
+        this.desc = desc;
+    }
+    getDueDate() {
+        return this.dueDate;
+    }
+    setDueDate(dueDate) {
+        this.dueDate = dueDate;
+    }
+    getPriority() {
+        return this.priority;
+    }
+    setPriority(priority) {
+        this.priority = priority;
     }
 }
