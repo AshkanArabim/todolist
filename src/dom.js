@@ -58,6 +58,7 @@ export default class dom {
     
     static makeInbox() {
         const inboxSelector = utils.etc('div','Inbox','inbox','select');
+        // inboxSelector.addEventListener('click', this.renderProject(Project))
 
         return inboxSelector;
     }
@@ -89,10 +90,38 @@ export default class dom {
 
     static makeMain() {
         const main = utils.cr('main');
-        const mainContent = undefined; //tasks object will replace this.
-        utils.appChildren(
-            main
-        )
+        utils.appChildren(main)
         return main;
+    }
+
+    static renderProject(project) {
+        const main = this.resetMain();
+        const container = utils.cr('div');
+        for (let task in project.tasks) {
+            container.appendChild(this.renderTask(project[task]));
+        }
+        main.appendChild(container);
+    }
+
+    static resetMain() {
+        const main = utils.qs('main');
+        main.textContent = '';
+        return main;
+    }
+
+    static renderTask(task) {
+        const container = utils.etc('div','','task');
+        const checkbox = utils.cr('input');
+        const title = utils.cr('h6');
+
+        checkbox.setAttribute('type','checkbox');
+        title.textContent = `${task.title}`;
+
+        utils.appChildren(
+            container, 
+            checkbox,
+            title
+        )
+        return container;
     }
 }
