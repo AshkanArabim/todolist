@@ -25,8 +25,7 @@ export default class dom {
         const body = utils.qs('body');
         utils.appChildren(
             body,
-            dom.makeSidebar(),
-            dom.makeMain()
+            dom.makeSidebar()
         );
     }
 
@@ -58,7 +57,17 @@ export default class dom {
     
     static makeInbox() {
         const inboxSelector = utils.etc('div','Inbox','inbox','select');
-        // inboxSelector.addEventListener('click', this.renderProject(Project))
+        //to be removed
+        const inbox = new Project('inbox');
+        inbox.newTask('test','just a test','tomorrow','high');
+        inbox.newTask('test2','another test','tomorrow','high');
+        inbox.newTask('test2','another test','tomorrow','high');
+        console.log(inbox);
+
+        inboxSelector.addEventListener('click', () => {
+            this.renderProject(inbox);
+        });
+        //to be removed
 
         return inboxSelector;
     }
@@ -88,23 +97,29 @@ export default class dom {
         return container;
     }
 
-    static makeMain() {
-        const main = utils.cr('main');
-        utils.appChildren(main)
-        return main;
-    }
+    // static makeMain() {
+    //     const main = utils.cr('main');
+    //     utils.appChildren(main)
+    //     return main;
+    // }
 
     static renderProject(project) {
         const main = this.resetMain();
-        const container = utils.cr('div');
+        const container = utils.etc('div','','taskholder');
         for (let task in project.tasks) {
-            container.appendChild(this.renderTask(project[task]));
+            container.appendChild(this.renderTask(project.tasks[task]));
         }
         main.appendChild(container);
+        utils.appChildren(
+            utils.qs('body'),
+            main
+        )
     }
 
     static resetMain() {
-        const main = utils.qs('main');
+        if(utils.qs('main')){utils.qs('main').remove()};
+        const main = utils.cr('main');
+        console.log(main)
         main.textContent = '';
         return main;
     }
