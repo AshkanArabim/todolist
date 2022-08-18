@@ -34,7 +34,9 @@ export default class dom {
         utils.appChildren(
             sidebar,
             dom.makeHeaderSection(),
+            utils.etc('h2','General'),
             dom.makeGeneralSection(),
+            utils.etc('h2','Projects'),
             dom.makeProjectsSection()
             );
         return sidebar;
@@ -73,35 +75,18 @@ export default class dom {
     }
 
     static makeProjectsSection() {
-        const container = utils.etc('div','','projectsholder');
-        const containerTitle = utils.etc('h2','Projects');
+        const container = utils.etc('div','','projects');
         const projectCreatorButton = utils.etc('button','New Project','new-project')
         utils.appChildren(
             container,
-            containerTitle,
-            this.makeProjectsGroup(),
-            projectCreatorButton,
-        );
-        return container;
-    }
-
-    static makeProjectsGroup() {
-        const container = utils.etc('div','','projects');
-        //this section to be removed
-        utils.appChildren(
-            container,
+            //this section to be automated
             utils.etc('div','sample','sample','select'),
-            utils.etc('div','sample','sample','select')
+            utils.etc('div','sample','sample','select'),
+            //this section to be automated
+            projectCreatorButton
         )
-        //this section to be removed
         return container;
     }
-
-    // static makeMain() {
-    //     const main = utils.cr('main');
-    //     utils.appChildren(main)
-    //     return main;
-    // }
 
     static renderProject(project) {
         const main = this.resetMain();

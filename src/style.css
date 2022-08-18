@@ -1,4 +1,5 @@
 :root{
+    --lv-1: #fff;
     --lv0: #eee;
     --lv1: #bbb;
     --lv2: #444;
@@ -14,14 +15,59 @@ body{
 }
 
 aside{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     flex: 0 1 1;
     width: 300px;
     background-color: var(--lv1);
 }
 
+aside>*{
+    padding: 0 15px;
+}
+
+.general, .projects{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+h2{
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+div.select{
+    border-radius: 5px;
+    background-color: var(--lv0);
+    transition: 0.1s;
+}
+
+div.select:hover{
+    background-color: var(--lv2);
+    color: var(--tx2);
+}
+
 main{
     flex: 1 1 0;
     padding: 30px 50px;
+    overflow: auto;
+}
+
+main>.taskholder{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.taskholder>div {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--lv-1);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px var(--lv1);
 }
 
 .header{
@@ -32,15 +78,7 @@ main{
     color: var(--tx2);
 }
 
-.general, .projectsholder{
-    margin: 15px;
-}
-
 .select{
     padding: 10px 25px;
     font-size: 1rem;
-}
-
-.general>h2, .projectsholder>h2{
-    font-size: 1.5rem;
 }
