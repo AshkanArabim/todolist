@@ -60,16 +60,11 @@ export default class dom {
     
     static makeInbox() {
         const inboxSelector = utils.etc('div','Inbox','inbox','select');
-        //to be removed
         const inbox = new Project('inbox');
-        inbox.newTask('test','just a test','tomorrow','high');
-        inbox.newTask('test2','another test','tomorrow','high');
-        inbox.newTask('test2','another test','tomorrow','high');
 
         inboxSelector.addEventListener('click', () => {
             this.renderProject(inbox);
         });
-        //to be removed
 
         return inboxSelector;
     }
@@ -92,11 +87,16 @@ export default class dom {
 
     static renderProjectSelectors() {
         const projectSelectorsHolder = utils.qs('.projects')
+        const deleteBtn = 
         projectSelectorsHolder.textContent = '';
         for (let projectIndex in Project.allProjects) {
-            projectSelectorsHolder.appendChild(
-                this.projectBtn(Project.allProjects[projectIndex].name)
-            );
+            const project = Project.allProjects[projectIndex];
+            const button = this.projectBtn(project.name);
+            projectSelectorsHolder.appendChild(button);
+
+            button.addEventListener('click', () => {
+                this.renderProject(project);
+            })
         }
     }
 
@@ -105,8 +105,9 @@ export default class dom {
         button.addEventListener('click', () => {
             Project.addProject(
                 prompt('Enter project name: ')
-            )
+            );
             this.renderProjectSelectors();
+            
         })
         return button;
     }

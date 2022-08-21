@@ -8,6 +8,10 @@
     --br: 5px;
 }
 
+*{
+    box-sizing: border-box;
+}
+
 body{
     display: flex;
     height: 100vh;
@@ -24,9 +28,6 @@ aside{
     background-color: var(--lv1);
     box-shadow: 2px 0 5px var(--lv1);
     overflow: auto;
-}
-
-aside>*{
     padding: 0 15px;
 }
 
@@ -108,6 +109,7 @@ h1{
 .header{
     height: 50px;
     display: flex;
+    margin: 0 -15px;
     align-items: center;
     justify-content: center;
     background-color: var(--lv2);
