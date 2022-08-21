@@ -1,10 +1,11 @@
 :root{
     --lv-1: #fff;
     --lv0: #eee;
-    --lv1: #bbb;
+    --lv1: #ccc;
     --lv2: #444;
     --tx1: black;
     --tx2: white;
+    --br: 5px;
 }
 
 body{
@@ -21,6 +22,8 @@ aside{
     flex: 0 1 1;
     width: 300px;
     background-color: var(--lv1);
+    box-shadow: 2px 0 5px var(--lv1);
+    overflow: auto;
 }
 
 aside>*{
@@ -36,29 +39,57 @@ aside>*{
 h2{
     font-size: 1.5rem;
     text-align: center;
+    padding: 1px;
 }
 
-div.select{
-    border-radius: 5px;
+.select, .new-btn{
+    border-radius: var(--br);
     background-color: var(--lv0);
     transition: 0.1s;
 }
 
-div.select:hover{
+.select:hover, .new-btn:hover{
     background-color: var(--lv2);
     color: var(--tx2);
 }
 
 main{
     flex: 1 1 0;
-    padding: 30px 50px;
     overflow: auto;
+}
+
+.tab-title{
+    height: 50px;
+    background-color: var(--lv1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 2px 0 2px var(--lv1);
+}
+
+.new-btn{
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
 }
 
 main>.taskholder{
     display: flex;
     flex-direction: column;
     gap: 30px;
+    padding: 30px 50px;
+}
+
+.task>*{
+    flex: 1 1 0;
+}
+
+.task>input{
+    flex: 0 1 0;
 }
 
 .taskholder>div {
@@ -66,15 +97,21 @@ main>.taskholder{
     justify-content: space-between;
     background-color: var(--lv-1);
     padding: 10px;
-    border-radius: 5px;
+    border-radius: var(--br);
     box-shadow: 0 2px 2px var(--lv1);
 }
 
-.header{
-    background-color: var(--lv2);
-    padding: 20px;
-    text-align: center;
+h1{
     font-size: 2rem;
+}
+
+.header{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--lv2);
+    text-align: center;
     color: var(--tx2);
 }
 

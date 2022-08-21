@@ -25,7 +25,7 @@ export default class dom {
         const body = utils.qs('body');
         utils.appChildren(
             body,
-            dom.makeSidebar()
+            this.makeSidebar()
         );
     }
 
@@ -33,17 +33,18 @@ export default class dom {
         const sidebar = utils.cr('aside');
         utils.appChildren(
             sidebar,
-            dom.makeHeaderSection(),
+            this.makeHeaderSection(),
             utils.etc('h2','General'),
-            dom.makeGeneralSection(),
+            this.makeGeneralSection(),
             utils.etc('h2','Projects'),
-            dom.makeProjectsSection()
+            this.makeProjectsSection(),
+            dom.makeNewProjectBtn()
             );
         return sidebar;
     }
 
     static makeHeaderSection() {
-        return utils.etc('div','To do list','header');
+        return utils.etc('h1','To Do List','header');
     }
 
     static makeGeneralSection() {
@@ -64,7 +65,6 @@ export default class dom {
         inbox.newTask('test','just a test','tomorrow','high');
         inbox.newTask('test2','another test','tomorrow','high');
         inbox.newTask('test2','another test','tomorrow','high');
-        console.log(inbox);
 
         inboxSelector.addEventListener('click', () => {
             this.renderProject(inbox);
@@ -74,18 +74,41 @@ export default class dom {
         return inboxSelector;
     }
 
-    static makeProjectsSection() {
+    static projectBtn(name) {
+        return utils.etc('div',name,name,'select');
+    }
+
+    static makeProjectsSection() {//this whole section is wrong
         const container = utils.etc('div','','projects');
-        const projectCreatorButton = utils.etc('button','New Project','new-project')
-        utils.appChildren(
-            container,
-            //this section to be automated
-            utils.etc('div','sample','sample','select'),
-            utils.etc('div','sample','sample','select'),
-            //this section to be automated
-            projectCreatorButton
-        )
+        
+        for (let projectIndex in Project.allProjects) {
+            container.appendChild(
+                this.projectBtn(Project.allProjects[projectIndex].name)
+            );
+        }
+        
         return container;
+    }
+
+    static renderProjectSelectors() {
+        const projectSelectorsHolder = utils.qs('.projects')
+        projectSelectorsHolder.textContent = '';
+        for (let projectIndex in Project.allProjects) {
+            projectSelectorsHolder.appendChild(
+                this.projectBtn(Project.allProjects[projectIndex].name)
+            );
+        }
+    }
+
+    static makeNewProjectBtn() {
+        const button = utils.etc('div','+','new-btn');
+        button.addEventListener('click', () => {
+            Project.addProject(
+                prompt('Enter project name: ')
+            )
+            this.renderProjectSelectors();
+        })
+        return button;
     }
 
     static renderProject(project) {
@@ -94,17 +117,28 @@ export default class dom {
         for (let task in project.tasks) {
             container.appendChild(this.renderTask(project.tasks[task]));
         }
-        main.appendChild(container);
         utils.appChildren(
-            utils.qs('body'),
-            main
+            main,
+            this.makeTabTitle(project),
+            container
         )
+        utils.qs('body').appendChild(main);
+    }
+
+    static makeTabTitle(project) {
+        const tabTitle = utils.etc('h1',`${project.name}`,'tab-title');
+        const addTaskBtn = utils.etc('div','+','new-btn');
+        addTaskBtn.addEventListener('click', () => {
+            Project.addTask(project);
+            this.renderProject(project);
+        })
+        tabTitle.appendChild(addTaskBtn);
+        return tabTitle;
     }
 
     static resetMain() {
         if(utils.qs('main')){utils.qs('main').remove()};
         const main = utils.cr('main');
-        console.log(main)
         main.textContent = '';
         return main;
     }
@@ -112,15 +146,18 @@ export default class dom {
     static renderTask(task) {
         const container = utils.etc('div','','task');
         const checkbox = utils.cr('input');
-        const title = utils.cr('h6');
+        const title = utils.etc('p',`${task.title}`);
+        const priority = utils.etc('p',`${task.priority}`);
+        const dueDate = utils.etc('p',`${task.dueDate}`);
 
         checkbox.setAttribute('type','checkbox');
-        title.textContent = `${task.title}`;
 
         utils.appChildren(
             container, 
             checkbox,
-            title
+            title,
+            priority,
+            dueDate
         )
         return container;
     }

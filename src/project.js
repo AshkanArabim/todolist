@@ -5,6 +5,23 @@ export default class Project {
         this.name = name;
         this.tasks = [];
     }
+
+    static allProjects = [];
+
+    static addTask(project) {
+        project.newTask(
+            prompt('title:'),
+            prompt('description:'),
+            prompt ('due date:'),
+            prompt('priority:')
+        );
+    }
+
+    static addProject(projectName) {
+        let project = new Project(projectName);
+        this.allProjects.push(project);
+    }
+
     getName() {
         return this.name;
     }
