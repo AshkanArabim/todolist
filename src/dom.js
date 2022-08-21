@@ -1,4 +1,5 @@
 import Project from './project';
+import trashcan from './assets/trashcan.svg'
 
 class utils {
     static cr(element) {return document.createElement(element);}
@@ -33,7 +34,7 @@ export default class dom {
         const sidebar = utils.cr('aside');
         utils.appChildren(
             sidebar,
-            this.makeHeaderSection(),
+            utils.etc('h1','To Do List','header'),
             utils.etc('h2','General'),
             this.makeGeneralSection(),
             utils.etc('h2','Projects'),
@@ -41,10 +42,6 @@ export default class dom {
             dom.makeNewProjectBtn()
             );
         return sidebar;
-    }
-
-    static makeHeaderSection() {
-        return utils.etc('h1','To Do List','header');
     }
 
     static makeGeneralSection() {
@@ -87,7 +84,6 @@ export default class dom {
 
     static renderProjectSelectors() {
         const projectSelectorsHolder = utils.qs('.projects')
-        const deleteBtn = 
         projectSelectorsHolder.textContent = '';
         for (let projectIndex in Project.allProjects) {
             const project = Project.allProjects[projectIndex];
@@ -128,12 +124,27 @@ export default class dom {
 
     static makeTabTitle(project) {
         const tabTitle = utils.etc('h1',`${project.name}`,'tab-title');
+        const btnContainer = utils.etc('span','','btn-container')
         const addTaskBtn = utils.etc('div','+','new-btn');
+        const deleteBtn = utils.etc('img','','delete-btn');
+        deleteBtn.setAttribute('src',trashcan);
         addTaskBtn.addEventListener('click', () => {
             Project.addTask(project);
             this.renderProject(project);
-        })
-        tabTitle.appendChild(addTaskBtn);
+        });
+        deleteBtn.addEventListener('click',() => {
+            Project.allProjects.splice(
+                Project.allProjects.indexOf(project),
+                1
+            )
+            this.resetMain();
+            this.renderProjectSelectors();
+        });
+        if (project.name !== 'inbox') { //temp
+            btnContainer.appendChild(deleteBtn);
+        };
+        btnContainer.appendChild(addTaskBtn);
+        tabTitle.appendChild(btnContainer);
         return tabTitle;
     }
 

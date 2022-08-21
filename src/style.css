@@ -43,13 +43,13 @@ h2{
     padding: 1px;
 }
 
-.select, .new-btn{
+.select, .new-btn, .delete-btn{
     border-radius: var(--br);
     background-color: var(--lv0);
     transition: 0.1s;
 }
 
-.select:hover, .new-btn:hover{
+.select:hover, .new-btn:hover, .delete-btn:hover{
     background-color: var(--lv2);
     color: var(--tx2);
 }
@@ -69,7 +69,7 @@ main{
     box-shadow: 2px 0 2px var(--lv1);
 }
 
-.new-btn{
+.new-btn, .delete-btn{
     width: 2rem;
     height: 2rem;
     display: flex;
@@ -120,4 +120,15 @@ h1{
 .select{
     padding: 10px 25px;
     font-size: 1rem;
+    display: flex;
+}
+
+.delete-btn {
+    fill: red;
+    padding: 5px;
+}
+
+.btn-container{
+    display: flex;
+    gap: 10px;
 }
