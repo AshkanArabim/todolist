@@ -112,7 +112,7 @@ export default class dom {
         const main = this.resetMain();
         const container = utils.etc('div','','taskholder');
         for (let task in project.tasks) {
-            container.appendChild(this.renderTask(project.tasks[task]));
+            container.appendChild(this.renderTask(project.tasks[task], project));
         }
         utils.appChildren(
             main,
@@ -155,21 +155,34 @@ export default class dom {
         return main;
     }
 
-    static renderTask(task) {
+    static renderTask(task, project) {
         const container = utils.etc('div','','task');
         const checkbox = utils.cr('input');
         const title = utils.etc('p',`${task.title}`);
         const priority = utils.etc('p',`${task.priority}`);
         const dueDate = utils.etc('p',`${task.dueDate}`);
+        const deleteBtn = utils.etc('img','','delete-btn');
 
         checkbox.setAttribute('type','checkbox');
+
+        deleteBtn.addEventListener('click', () => {
+            console.log(project.tasks);
+            project.tasks.splice(
+                project.tasks.indexOf(task),
+                1
+            );
+            console.log(project.tasks);
+            console.log('working');
+            this.renderProject(project);
+        })
 
         utils.appChildren(
             container, 
             checkbox,
             title,
             priority,
-            dueDate
+            dueDate,
+            deleteBtn
         )
         return container;
     }
