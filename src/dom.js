@@ -141,15 +141,19 @@ export default class dom {
     static renderTask(task, project) {
         const container = utils.etc('div','','task');
         const taskShort = utils.etc('div','','task-short');
-        const taskExpanded = utils.etc('div','','task-expanded');
-        const checkbox = utils.cr('input');
         const dataHolder = utils.etc('div','','task-data');
-        const title = utils.etc('p',`${task.title}`);
-        const priority = utils.etc('p',`${task.priority}`);
-        const dueDate = utils.etc('p',`${task.dueDate}`);
-        const expandBtn = utils.etc('button','↓','new-btn');
-
+        const taskExpanded = utils.etc('div','','task-expanded');
+        
+        const checkbox = utils.cr('input');
         checkbox.setAttribute('type','checkbox');
+
+        const title = utils.etc('p',`${task.title}`);
+        const description = utils.etc('p',`${task.desc}`);
+        const priority = utils.etc('p',`${task.priority}`);
+        const dueDate = utils.etc('input','');
+        dueDate.setAttribute('type','date');
+        
+        const expandBtn = utils.etc('button','↓','new-btn');
 
         expandBtn.addEventListener('click', () => {
             taskExpanded.classList.toggle('show');
@@ -169,6 +173,7 @@ export default class dom {
             taskExpanded,
             priority,
             checkbox,
+            description
         )
         utils.appChildren(
             container,
