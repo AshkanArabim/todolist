@@ -140,6 +140,8 @@ export default class dom {
 
     static renderTask(task, project) {
         const container = utils.etc('div','','task');
+        const taskShort = utils.etc('div','','task-short');
+        const taskExpanded = utils.etc('div','','task-expanded');
         const checkbox = utils.cr('input');
         const dataHolder = utils.etc('div','','task-data');
         const title = utils.etc('p',`${task.title}`);
@@ -149,21 +151,29 @@ export default class dom {
 
         checkbox.setAttribute('type','checkbox');
 
-        // expandBtn.addEventListener('click', () => {
-        //     project.removeTask(task);
-        //     this.renderProject(project);
-        // })
+        expandBtn.addEventListener('click', () => {
+            taskExpanded.classList.toggle('show');
+        })
 
         utils.appChildren(
             dataHolder,
             title,
             dueDate
         )
-
         utils.appChildren(
-            container,
+            taskShort,
             dataHolder,
             expandBtn
+        )
+        utils.appChildren(
+            taskExpanded,
+            priority,
+            checkbox,
+        )
+        utils.appChildren(
+            container,
+            taskShort,
+            taskExpanded
         )
         return container;
     }

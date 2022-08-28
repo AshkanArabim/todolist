@@ -89,7 +89,7 @@ main>.taskholder{
     padding: 30px 50px;
 }
 
-.task>input{
+.task-short>input{
     flex: 0 1 0;
 }
 
@@ -100,14 +100,24 @@ main>.taskholder{
     justify-content: space-between;
 }
 
-.taskholder>div {
-    display: flex;
-    justify-content: space-between;
+.task{
     background-color: var(--lv-1);
     padding: 10px;
     border-radius: var(--br);
     box-shadow: 0 2px 2px var(--lv1);
+}
+
+.task-short {
+    display: flex;
+    justify-content: space-between;
     gap: 10px;
+}
+
+.task-expanded{
+    display: none;
+}
+.task-expanded.show{
+    display: block;
 }
 
 h1{
