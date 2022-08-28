@@ -59,6 +59,10 @@ main{
     overflow: auto;
 }
 
+button{
+    border: none;
+}
+
 .tab-title{
     height: 50px;
     background-color: var(--lv1);
@@ -70,8 +74,8 @@ main{
 }
 
 .new-btn, .delete-btn{
-    width: 2rem;
-    height: 2rem;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,12 +89,15 @@ main>.taskholder{
     padding: 30px 50px;
 }
 
-.task>*{
-    flex: 1 1 0;
-}
-
 .task>input{
     flex: 0 1 0;
+}
+
+.task-data{
+    flex: 1 1 0;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .taskholder>div {
@@ -100,6 +107,7 @@ main>.taskholder{
     padding: 10px;
     border-radius: var(--br);
     box-shadow: 0 2px 2px var(--lv1);
+    gap: 10px;
 }
 
 h1{
@@ -121,11 +129,19 @@ h1{
     padding: 10px 25px;
     font-size: 1rem;
     display: flex;
+    justify-content: space-between;
+    position: relative;
 }
 
-.delete-btn {
-    fill: red;
-    padding: 5px;
+.project.select:hover::after{
+    content: '×';
+    position: absolute;
+    right: 30px;
+}
+
+.delete-project{
+    width: 20px;
+    height: 100%;
 }
 
 .btn-container{

@@ -8,18 +8,15 @@ export default class Project {
 
     static allProjects = [];
 
-    static addTask(project) {
-        project.newTask(
-            prompt('title:'),
-            prompt('description:'),
-            prompt ('due date:'),
-            prompt('priority:')
-        );
-    }
-
     static addProject(projectName) {
         let project = new Project(projectName);
         this.allProjects.push(project);
+    }
+
+    static deleteProject(project) {
+        this.allProjects.splice(
+            this.allProjects.indexOf(project),1
+        );
     }
 
     getName() {
@@ -28,9 +25,13 @@ export default class Project {
     setName(name) {
         this.name = name;
     }
-    newTask(title, desc, dueDate, priority) {
+    newTask(title) {
         this.tasks.push(
-            new Task(title, desc, dueDate, priority)
+            new Task(title)
         );
+    }
+    deleteTask(task) {
+        const index = this.tasks.indexOf(task);
+        this.tasks.splice(index, 1);
     }
 }
