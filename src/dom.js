@@ -148,16 +148,21 @@ export default class dom {
         checkbox.setAttribute('type','checkbox');
 
         const title = utils.etc('p',`${task.title}`);
-        const description = utils.etc('p',`${task.desc}`);
-        const priority = utils.etc('p',`${task.priority}`);
+        const description = utils.etc('p',`${task.desc}`,'task-desc');
+        const priority = utils.etc('p',`Priority: ${task.priority}`,'task-priority');
         const dueDate = utils.etc('input','');
         dueDate.setAttribute('type','date');
         
+        const deleteBtn = utils.etc('button','🗑️','new-btn','task-delete-btn');
         const expandBtn = utils.etc('button','↓','new-btn');
 
         expandBtn.addEventListener('click', () => {
             taskExpanded.classList.toggle('show');
         })
+
+        if (description.textContent === '') {
+            description.textContent = 'Click to add description.'
+        }
 
         utils.appChildren(
             dataHolder,
@@ -166,14 +171,15 @@ export default class dom {
         )
         utils.appChildren(
             taskShort,
+            checkbox,
             dataHolder,
             expandBtn
         )
         utils.appChildren(
             taskExpanded,
             priority,
-            checkbox,
-            description
+            description,
+            deleteBtn
         )
         utils.appChildren(
             container,

@@ -43,6 +43,10 @@ h2{
     padding: 1px;
 }
 
+h1{
+    font-size: 2rem;
+}
+
 .select, .new-btn, .delete-btn{
     border-radius: var(--br);
     background-color: var(--lv0);
@@ -105,6 +109,9 @@ main>.taskholder{
     padding: 10px;
     border-radius: var(--br);
     box-shadow: 0 2px 2px var(--lv1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .task-short {
@@ -116,12 +123,28 @@ main>.taskholder{
 .task-expanded{
     display: none;
 }
+
 .task-expanded.show{
-    display: block;
+    display: grid;
+    grid-template: 3fr 1fr / 3fr 1fr;
 }
 
-h1{
-    font-size: 2rem;
+.task-expanded>*{
+    display: flex;
+    align-items: center;
+}
+
+.task-desc{
+    grid-row: 1 / 4;
+    grid-column: 1 / 5;
+}
+
+.task-priority{
+    grid-column: 1 / 4
+}
+
+.task-delete-btn{
+    grid-column: 4 / 5;
 }
 
 .header{
