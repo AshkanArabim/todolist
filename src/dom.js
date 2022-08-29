@@ -159,6 +159,10 @@ export default class dom {
         expandBtn.addEventListener('click', () => {
             taskExpanded.classList.toggle('show');
         })
+        deleteBtn.addEventListener('click', () => {
+            project.deleteTask(task);
+            this.renderProject(project);
+        })
 
         if (description.textContent === '') {
             description.textContent = 'Click to add description.'
