@@ -67,14 +67,22 @@ export default class dom {
     }
 
     static projectBtn(project) {
-        const button = utils.etc('button',project.name,'select', 'project');
-        const deleteBtn = utils.etc('span','','delete-project');
-        deleteBtn.addEventListener('click', () => {
+        const button = utils.etc('div','','project');
+        const projectSelector = utils.etc('button',`${project.name}`,'show-project');
+        const deleteProject = utils.etc('button','×','delete-project');
+        deleteProject.addEventListener('click', () => {
             Project.deleteProject(project)
             this.resetMain();
             this.renderProjectSelectors();
         })
-        button.appendChild(deleteBtn);
+        projectSelector.addEventListener('click', () => {
+            this.renderProject(project);
+        })
+        utils.appChildren(
+            button,
+            projectSelector,
+            deleteProject
+        )
         return button;
     }
 
@@ -85,10 +93,6 @@ export default class dom {
             const project = Project.allProjects[projectIndex];
             const button = this.projectBtn(project);
             projectSelectorsHolder.appendChild(button);
-
-            button.addEventListener('click', () => {
-                this.renderProject(project);
-            })
         }
     }
 
