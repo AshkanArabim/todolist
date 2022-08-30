@@ -9,6 +9,14 @@ export default class Project {
     static allProjects = [];
 
     static addProject(projectName) {
+        const ap = this.allProjects;
+        for (let pi in ap) {
+            if (ap[pi].name === projectName) {
+                alert("Project name can't be duplicate.")
+                return
+            }
+        }
+        if(projectName === null) {return}
         let project = new Project(projectName);
         this.allProjects.push(project);
     }
@@ -26,6 +34,7 @@ export default class Project {
         this.name = name;
     }
     newTask(title) {
+        if(title === null) {return}
         this.tasks.push(
             new Task(title)
         );

@@ -153,10 +153,16 @@ export default class dom {
 
         const title = utils.etc('p',`${task.title}`);
         const description = utils.etc('p',`${task.desc}`,'task-desc');
-        const priority = utils.etc('p',`Priority: ${task.priority}`,'task-priority');
+        const priority = utils.etc('p','Priority: ','task-priority');
         const dueDate = utils.etc('input','');
         dueDate.setAttribute('type','date');
         
+        const prioritySelect = utils.etc('select','');
+        const optionLow = utils.etc('option','Low');
+        optionLow.value = 'Low';
+        const optionHigh = utils.etc('option','High');
+        optionHigh.value = 'High';
+
         const deleteBtn = utils.etc('button','🗑️','new-btn','task-delete-btn');
         const expandBtn = utils.etc('button','↓','new-btn');
 
@@ -172,6 +178,15 @@ export default class dom {
             description.textContent = 'Click to add description.'
         }
 
+        utils.appChildren(
+            prioritySelect,
+            optionLow,
+            optionHigh
+        )
+        utils.appChildren(
+            priority,
+            prioritySelect
+        )
         utils.appChildren(
             dataHolder,
             title,
