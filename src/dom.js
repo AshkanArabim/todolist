@@ -152,7 +152,7 @@ export default class dom {
         checkbox.setAttribute('type','checkbox');
 
         const title = utils.etc('p',`${task.title}`);
-        const description = utils.etc('p',`${task.desc}`,'task-desc');
+        const description = utils.etc('textarea',`${task.desc}`,'task-desc');
         const priority = utils.etc('p','Priority: ','task-priority');
         const dueDate = utils.etc('input','');
         dueDate.setAttribute('type','date');
@@ -173,10 +173,16 @@ export default class dom {
             project.deleteTask(task);
             this.renderProject(project);
         })
-
-        if (description.textContent === '') {
-            description.textContent = 'Click to add description.'
-        }
+        prioritySelect.addEventListener('change', () => {
+            project.priority = prioritySelect.value;
+            console.log(project.priority);
+            if(project.priority === 'High') {
+                title.classList.add('red');
+                // this.sortByPriority()
+            } else {
+                title.classList.remove('red');
+            }
+        })
 
         utils.appChildren(
             prioritySelect,
@@ -210,5 +216,9 @@ export default class dom {
             taskExpanded
         )
         return container;
+    }
+
+    static sortByPriority() {
+
     }
 }

@@ -204,3 +204,7 @@ main>.taskholder{
     display: flex;
     gap: 10px;
 }
+
+.red{
+    color: red;
+}
