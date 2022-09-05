@@ -49,8 +49,6 @@ export default class dom {
         utils.appChildren(
             container,
             this.makeInbox(),
-            utils.etc('button','Today','today','select'),
-            utils.etc('button','Next 7 Days','7days','select')
         );
         return container;
     }
@@ -158,7 +156,7 @@ export default class dom {
         const deleteBtn = utils.etc('button','🗑️','new-btn','task-delete-btn');
         const expandBtn = utils.etc('button','↓','new-btn');
 
-        if (task.getPriority() == 'High') {
+        if (task.getPriority() === 'High') {
             title.classList.add('red');
         } else {
             title.classList.remove('red');
@@ -179,7 +177,7 @@ export default class dom {
 
         utils.appChildren(
             priority,
-            this.makePrioritySelector(task)
+            this.makePrioritySelector(task, title)
         )
         utils.appChildren(
             dataHolder,
@@ -206,21 +204,29 @@ export default class dom {
         return container;
     }
 
-    static makePrioritySelector(task){
+    static makePrioritySelector(task, title){
         const prioritySelect = utils.etc('select','');
         const optionLow = utils.etc('option','Low');
         optionLow.value = 'Low';
         const optionHigh = utils.etc('option','High');
         optionHigh.value = 'High';
+
         utils.appChildren(
             prioritySelect,
             optionLow,
             optionHigh
         )
 
-        prioritySelect.addEventListener('change', () => {
+        prioritySelect.value = task.getPriority();
+        
+        prioritySelect.addEventListener('input', () => {
             task.setPriority(prioritySelect.value);
-            // this.sortByPriority()
+
+            if (task.getPriority() === 'High') {
+                title.classList.add('red');
+            } else {
+                title.classList.remove('red');
+            }
         })
 
         return prioritySelect;
@@ -233,7 +239,6 @@ export default class dom {
 
         dueDate.addEventListener('input', () => {
             task.setDueDate(dueDate.value);
-            console.log(task.getDueDate());
         })
 
         return dueDate;

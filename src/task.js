@@ -3,7 +3,7 @@ export default class Task {
         this.title = title;
         this.desc = '';
         this.dueDate = null;
-        this.priority = 'low';
+        this.priority = 'Low';
     }
     getTitle() {
         return this.title;
