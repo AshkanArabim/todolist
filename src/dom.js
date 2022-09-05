@@ -154,49 +154,37 @@ export default class dom {
         const title = utils.etc('p',`${task.title}`);
         const description = utils.etc('textarea',`${task.desc}`,'task-desc');
         const priority = utils.etc('p','Priority: ','task-priority');
-        const dueDate = utils.etc('input','');
-        dueDate.setAttribute('type','date');
-        
-        const prioritySelect = utils.etc('select','');
-        const optionLow = utils.etc('option','Low');
-        optionLow.value = 'Low';
-        const optionHigh = utils.etc('option','High');
-        optionHigh.value = 'High';
 
         const deleteBtn = utils.etc('button','🗑️','new-btn','task-delete-btn');
         const expandBtn = utils.etc('button','↓','new-btn');
 
+        if (task.getPriority() == 'High') {
+            title.classList.add('red');
+        } else {
+            title.classList.remove('red');
+        }
+
         expandBtn.addEventListener('click', () => {
             taskExpanded.classList.toggle('show');
         })
+
         deleteBtn.addEventListener('click', () => {
             project.deleteTask(task);
             this.renderProject(project);
         })
-        prioritySelect.addEventListener('change', () => {
-            project.priority = prioritySelect.value;
-            console.log(project.priority);
-            if(project.priority === 'High') {
-                title.classList.add('red');
-                // this.sortByPriority()
-            } else {
-                title.classList.remove('red');
-            }
+
+        description.addEventListener('input', () => {
+            task.setDesc(description.value);
         })
 
         utils.appChildren(
-            prioritySelect,
-            optionLow,
-            optionHigh
-        )
-        utils.appChildren(
             priority,
-            prioritySelect
+            this.makePrioritySelector(task)
         )
         utils.appChildren(
             dataHolder,
             title,
-            dueDate
+            this.makeDueDateSelector(task)
         )
         utils.appChildren(
             taskShort,
@@ -218,7 +206,36 @@ export default class dom {
         return container;
     }
 
-    static sortByPriority() {
+    static makePrioritySelector(task){
+        const prioritySelect = utils.etc('select','');
+        const optionLow = utils.etc('option','Low');
+        optionLow.value = 'Low';
+        const optionHigh = utils.etc('option','High');
+        optionHigh.value = 'High';
+        utils.appChildren(
+            prioritySelect,
+            optionLow,
+            optionHigh
+        )
 
+        prioritySelect.addEventListener('change', () => {
+            task.setPriority(prioritySelect.value);
+            // this.sortByPriority()
+        })
+
+        return prioritySelect;
+    }
+
+    static makeDueDateSelector(task) {
+        const dueDate = utils.etc('input','');
+        dueDate.setAttribute('type','date');
+        dueDate.value = task.getDueDate();
+
+        dueDate.addEventListener('input', () => {
+            task.setDueDate(dueDate.value);
+            console.log(task.getDueDate());
+        })
+
+        return dueDate;
     }
 }
