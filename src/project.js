@@ -10,16 +10,16 @@ export default class Project {
     static allProjects = [];
 
     static addProject(projectName) {
-        const ap = this.allProjects;
-        for (let pi in ap) {
-            if (ap[pi].name === projectName) {
+        const allProjs = this.allProjects;
+        for (let index in allProjs) {
+            if (allProjs[index].name === projectName) {
                 alert("Project name can't be duplicate.")
                 return
             }
         }
         if(projectName === null) {return}
         let project = new Project(projectName);
-        ap.push(project);
+        allProjs.push(project);
 
         storage.populateStorage();
     }

@@ -38,33 +38,11 @@ export default class dom {
         utils.appChildren(
             sidebar,
             utils.etc('h1','To Do List','header'),
-            utils.etc('h2','General'),
-            this.makeGeneralSection(),
             utils.etc('h2','Projects'),
             ProjectSelectorHolder,
             this.makeAddProjectBtn()
             );
         return sidebar;
-    }
-
-    static makeGeneralSection() {
-        const container = utils.etc('div','','general')
-        utils.appChildren(
-            container,
-            this.makeInbox(),
-        );
-        return container;
-    }
-    
-    static makeInbox() {
-        const inboxSelector = utils.etc('button','Inbox','inbox','select');
-        const inbox = new Project('inbox');
-
-        inboxSelector.addEventListener('click', () => {
-            this.renderProject(inbox);
-        });
-
-        return inboxSelector;
     }
 
     static projectBtn(project) {
