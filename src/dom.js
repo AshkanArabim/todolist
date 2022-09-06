@@ -16,7 +16,7 @@ class utils {
             for (let i = 2; i<arguments.length; i++) {
                 product.classList.add(arguments[i]);
             }
-        };
+        }
         return product;
     }
 }
@@ -115,7 +115,7 @@ export default class dom {
     }
 
     static resetMain() {
-        if(utils.qs('main')){utils.qs('main').remove()};
+        if(utils.qs('main')){utils.qs('main').remove()}
         const main = utils.cr('main');
         main.textContent = '';
         return main;
