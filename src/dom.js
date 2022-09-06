@@ -1,5 +1,5 @@
 import Project from './project';
-import trashcan from './assets/trashcan.svg'
+import storage from './storage';
 
 class utils {
     static cr(element) {return document.createElement(element);}
@@ -23,6 +23,7 @@ class utils {
 
 export default class dom {
     static render() {
+        storage.checkStorage();
         const body = utils.qs('body');
         utils.appChildren(
             body,
@@ -32,13 +33,15 @@ export default class dom {
 
     static makeSidebar() {
         const sidebar = utils.cr('aside');
+        const ProjectSelectorHolder = utils.etc('div','','projects');
+        this.renderProjectSelectors(ProjectSelectorHolder);
         utils.appChildren(
             sidebar,
             utils.etc('h1','To Do List','header'),
             utils.etc('h2','General'),
             this.makeGeneralSection(),
             utils.etc('h2','Projects'),
-            utils.etc('div','','projects'),
+            ProjectSelectorHolder,
             this.makeAddProjectBtn()
             );
         return sidebar;
@@ -84,13 +87,13 @@ export default class dom {
         return button;
     }
 
-    static renderProjectSelectors() {
-        const projectSelectorsHolder = utils.qs('.projects')
-        projectSelectorsHolder.textContent = '';
+    static renderProjectSelectors(holder) {
+        if(holder === undefined){holder = utils.qs('.projects')}
+        holder.textContent = '';
         for (let projectIndex in Project.allProjects) {
             const project = Project.allProjects[projectIndex];
             const button = this.projectBtn(project);
-            projectSelectorsHolder.appendChild(button);
+            holder.appendChild(button);
         }
     }
 
@@ -149,8 +152,8 @@ export default class dom {
         const checkbox = utils.cr('input');
         checkbox.setAttribute('type','checkbox');
 
-        const title = utils.etc('p',`${task.title}`);
-        const description = utils.etc('textarea',`${task.desc}`,'task-desc');
+        const title = utils.etc('p',`${task.getTitle()}`);
+        const description = utils.etc('textarea',`${task.getDesc()}`,'task-desc');
         const priority = utils.etc('p','Priority: ','task-priority');
 
         const deleteBtn = utils.etc('button','🗑️','new-btn','task-delete-btn');
