@@ -1,5 +1,5 @@
 # todolist
-This is a simple to-do list app that lets users create tasks and projects to keep track of their responsabilities. (You know what a to-do list is, right?)
+This is a simple to-do list app that lets users create tasks and projects to keep track of their responsabilities. (You know what a to-do list is, right?) It was written from the ground-up by myself.
 
 Users can:
 1. Create tasks and mark them as complete
