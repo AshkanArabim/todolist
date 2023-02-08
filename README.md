@@ -9,3 +9,5 @@ Users can:
 5. Delete tasks and projects
 
 In attition to all this, users' data is automatically saved on their local storage. 
+
+![image](https://user-images.githubusercontent.com/71609332/217419408-e656fa8d-82c6-4892-bfd5-e57c60a92fc4.png)
